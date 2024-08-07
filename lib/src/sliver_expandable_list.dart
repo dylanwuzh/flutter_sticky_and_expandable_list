@@ -11,7 +11,7 @@ typedef ExpandableHeaderBuilder = Widget Function(
 typedef ExpandableItemBuilder = Widget Function(
     BuildContext context, int sectionIndex, int itemIndex, int index);
 typedef ExpandableSeparatorBuilder = Widget Function(
-    BuildContext context, bool isSectionSeparator, int index);
+    BuildContext context, bool isSectionSeparator, int sectionIndex, int itemIndex, int index);
 typedef ExpandableSectionBuilder = Widget Function(
     BuildContext context, ExpandableSectionContainerInfo containerInfo);
 
@@ -207,7 +207,7 @@ class SliverExpandableChildDelegate<T, S extends ExpandableListSection<T>> {
                 return itemBuilder(
                     context, sectionIndex, i ~/ 2, itemRealIndex);
               } else {
-                return separatorBuilder!(context, false, itemRealIndex);
+                return separatorBuilder!(context, false, sectionIndex, i ~/ 2, itemRealIndex);
               }
             }, childCount: sectionChildCount);
             var containerInfo = ExpandableSectionContainerInfo(
@@ -238,7 +238,7 @@ class SliverExpandableChildDelegate<T, S extends ExpandableListSection<T>> {
             assert(containerInfo.content != null);
             return container;
           } else {
-            itemView = separatorBuilder!(context, true,
+            itemView = separatorBuilder!(context, true, index -1, -1,
                 sectionIndex + (section.getItems()?.length ?? 0));
           }
           return itemView;

@@ -49,7 +49,7 @@ class _ExampleSideHeaderState extends State<ExampleSideHeader> {
                   ),
                 );
               },
-              separatorBuilder: (context, isSectionSeparator, index) {
+              separatorBuilder: (context, isSectionSeparator, sectionIndex, itemIndex, index) {
                 return isSectionSeparator
                     ? SizedBox(
                         height: 15,
